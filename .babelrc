@@ -1,15 +1,5 @@
 {
   "presets": [
-  ],
-  "env": {
-    "test": {
-      "presets": [
-        ["env", {
-          "targets": {
-            "node": "current"
-          }
-        }]
-      ]
-    }
-  }
+    ["env", {"loose": true}]
+  ]
 }

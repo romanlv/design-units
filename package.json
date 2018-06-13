@@ -1,13 +1,15 @@
 {
   "name": "design-units",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Design system utils for emotion, styled-components and other css-in-js libraries",
   "main": "dist/index.js",
   "scripts": {
     "size": "bundlesize",
     "test": "jest --watch",
     "prettier": "prettier --write src/*.js",
-    "prepare": "rollup src/index.js --format cjs --file dist/index.js"
+    "prepublish": "npm run build && npm run build:min && npm run size",
+    "build": "babel src --out-dir dist",
+    "build:min": "uglifyjs dist/index.js > dist/index.min.js"
   },
   "keywords": [
     "design-system",
@@ -23,15 +25,14 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-2": "^6.24.1",
     "bundlesize": "^0.17.0",
     "jest": "^23.1.0",
     "prettier": "^1.13.5",
-    "rollup": "^0.60.4"
+    "uglify-js": "^3.4.0"
   },
   "bundlesize": [
     {
-      "path": "dist/*.js",
+      "path": "dist/*.min.js",
       "maxSize": "1 kB"
     }
   ],

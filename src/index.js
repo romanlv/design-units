@@ -31,7 +31,7 @@ const merge = (a, b) =>
       (obj, key) =>
         Object.assign(obj, {
           [key]:
-            a[key] !== null && typeof a[key] === "object"
+            a[key] !== null && a[key] instanceof Object
               ? merge(a[key], b[key])
               : b[key]
         }),
