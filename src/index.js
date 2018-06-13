@@ -1,7 +1,9 @@
 const defaultBreakpoints = ["40em", "52em", "64em"];
 
 const is = n => n !== undefined && n !== null;
-const num = n => typeof n === "number" && !isNaN(n);
+
+const num = n => !isNaN(parseFloat(n)) && isFinite(n);
+
 const px = n => (num(n) ? `${n}px` : n);
 
 // const neg = n => n < 0;
@@ -37,20 +39,21 @@ const merge = (a, b) =>
     )
   );
 
-
 const mappings = [
   { re: /^padding/, to: "space" },
   { re: /^margin/, to: "space" },
   { re: /color$/i, to: "colors" },
-  { name: "fontFamily", to: "fonts" },
-]
+  { name: "fontFamily", to: "fonts" }
+];
 
 const getUnitValue = (theme, cssProp, n) => {
   if (cssProp === "width") {
     return getWidth(n);
   }
 
-  const map = mappings.find(m => m.name === cssProp || (m.re && m.re.test(cssProp)))
+  const map = mappings.find(
+    m => m.name === cssProp || (m.re && m.re.test(cssProp))
+  );
   const area = map ? map.to : `${cssProp}s`;
 
   const val = get(theme, [area, n], n);
@@ -61,7 +64,7 @@ const getUnitValue = (theme, cssProp, n) => {
   return px(val);
 };
 
-export const designUnits = obj => props => {
+const designUnits = obj => props => {
   // TODO: do not create `bp` until found item with multiple values
   const bp = breaks(props);
   const { theme } = props;

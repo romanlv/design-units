@@ -12,10 +12,10 @@ const theme = {
   },
   fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
   letterSpacings: {
-    normal: 'normal',
-    tracked: '0.1em',
-    tight: '-0.05em',
-    mega: '0.25em',
+    normal: "normal",
+    tracked: "0.1em",
+    tight: "-0.05em",
+    mega: "0.25em"
   }
 };
 
@@ -86,11 +86,11 @@ describe("breakpoints", () => {
     expect(du({ fontSize: 2 })(props)).toEqual({
       fontSize: "16px"
     });
-  })
+  });
 
   it("should pick using string keys", () => {
     expect(du({ letterSpacing: "tracked" })(props)).toEqual({
       letterSpacing: "0.1em"
     });
-  })
+  });
 });
