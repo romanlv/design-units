@@ -9,6 +9,13 @@ const theme = {
   },
   fonts: {
     serif: "athelas, georgia, times, serif"
+  },
+  fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
+  letterSpacings: {
+    normal: 'normal',
+    tracked: '0.1em',
+    tight: '-0.05em',
+    mega: '0.25em',
   }
 };
 
@@ -69,9 +76,21 @@ describe("breakpoints", () => {
     });
   });
 
-  it("should return font", () => {
+  it("should return font family", () => {
     expect(du({ fontFamily: "serif" })(props)).toEqual({
       fontFamily: "athelas, georgia, times, serif"
     });
   });
+
+  it("should return fontSize", () => {
+    expect(du({ fontSize: 2 })(props)).toEqual({
+      fontSize: "16px"
+    });
+  })
+
+  it("should pick using string keys", () => {
+    expect(du({ letterSpacing: "tracked" })(props)).toEqual({
+      letterSpacing: "0.1em"
+    });
+  })
 });

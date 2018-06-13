@@ -1,12 +1,12 @@
 {
   "name": "design-units",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Design system utils for emotion, styled-components and other css-in-js libraries",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "babel src/index.js -o dist/index.js",
+    "prepare": "mkdir -p dist && babel src/index.js -o dist/index.js",
     "size": "bundlesize",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [
     "design-system",

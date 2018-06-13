@@ -37,25 +37,28 @@ const merge = (a, b) =>
     )
   );
 
+
+const mappings = [
+  { re: /^padding/, to: "space" },
+  { re: /^margin/, to: "space" },
+  { re: /color$/i, to: "colors" },
+  { name: "fontFamily", to: "fonts" },
+]
+
 const getUnitValue = (theme, cssProp, n) => {
   if (cssProp === "width") {
     return getWidth(n);
   }
 
-  // TODO: pick from `${cssProp}s` path if no rule found
-  if (/color$/i.test(cssProp)) {
-    return get(theme, ["colors", n], n);
-  }
+  const map = mappings.find(m => m.name === cssProp || (m.re && m.re.test(cssProp)))
+  const area = map ? map.to : `${cssProp}s`;
 
-  if (/^fontFamily$/i.test(cssProp)) {
-    return get(theme, ["fonts", n], n);
-  }
+  const val = get(theme, [area, n], n);
 
-  if (!num(n)) {
-    return n;
+  if (!val || !num(val)) {
+    return val;
   }
-  const space = get(theme, ["space", n], n);
-  return px(space);
+  return px(val);
 };
 
 export const designUnits = obj => props => {
