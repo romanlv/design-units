@@ -1,6 +1,9 @@
 # design-units 
 Lightweight alternative to [styled-system](https://github.com/jxnblk/styled-system)
-Only `~800` bytes (gzipped)
+
+Only `~850` bytes (gzipped) and does not force developers to use component props for styling
+
+Read more about [design systems](https://varun.ca/styled-system/)
 
 # examples
 
@@ -21,3 +24,21 @@ const Footer = styled.div`
 
 ```
 
+This requires theme provider with theme units 
+
+```js
+
+export const theme = {
+  breakpoints: [320, 480, 640],
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  fontSizes: [12, 14, 16, 20, 24, 36, 48, 80, 96],
+  // ...
+}
+
+import { ThemeProvider } from 'emotion-theming'
+
+ <ThemeProvider theme={theme}>
+    <Footer />
+  </ThemeProvider>
+
+```
