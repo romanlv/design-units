@@ -1,7 +1,7 @@
 # design-units 
 Lightweight alternative to [styled-system](https://github.com/jxnblk/styled-system)
 
-Only `~1Kb` bytes (gzipped) and does not force developers to use component props for styling
+Only [`~700b`](https://bundlephobia.com/result?p=design-units) bytes (minified and gzipped) and does not force developers to use component props for styling
 
 Read more about [design systems](https://varun.ca/styled-system/)
 
