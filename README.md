@@ -111,3 +111,17 @@ styled.div`
 
 `
 ```
+
+## Nested selectors 
+```js
+styled.div`
+${units({
+  color: "black", 
+  "&:hover": {
+    color: "blue"
+  }
+})}
+`
+
+```
+
