@@ -1,18 +1,20 @@
 {
   "name": "design-units",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Design system utils for emotion, styled-components and other css-in-js libraries",
   "main": "dist/index.js",
   "scripts": {
     "size": "bundlesize",
     "test": "jest --watch",
+    "test-cov": "jest --coverage",
+    "open-cov": "open coverage/lcov-report/index.html",
     "prettier": "prettier --write src/*.js",
     "prepublish": "npm run build && npm run build:min && npm run size",
-    "build": "babel src --out-dir dist",
+    "build": "mkdir -p dist && babel src/index.js -o dist/index.js",
     "build:min": "uglifyjs dist/index.js > dist/index.min.js"
   },
   "keywords": [
-    "design-system",
+    "design system",
     "emotion",
     "styled-components"
   ],
@@ -42,9 +44,16 @@
       "src/**/*.{js,jsx,mjs}"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {

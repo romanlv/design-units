@@ -33,10 +33,8 @@ describe("breakpoints", () => {
 
   it("should split to breakpoints", () => {
     expect(du({ padding: [2, 3] })(props)).toEqual({
+      padding: "8px",
       "@media (min-width: 320px)": {
-        padding: "8px"
-      },
-      "@media (min-width: 480px)": {
         padding: "16px"
       }
     });
@@ -44,17 +42,30 @@ describe("breakpoints", () => {
 
   it("should split to breakpoints, multi values", () => {
     expect(
-      du({ padding: [2, 3], marginTop: 1, marginBottom: [1, 2] })(props)
+      du({ padding: [2, 3], marginTop: 1, marginBottom: [1, 2, 3] })(props)
     ).toEqual({
       marginTop: "4px",
+      padding: "8px",
+      marginBottom: "4px",
       "@media (min-width: 320px)": {
-        padding: "8px",
-        marginBottom: "4px"
-      },
-      "@media (min-width: 480px)": {
         padding: "16px",
         marginBottom: "8px"
+      },
+      "@media (min-width: 480px)": {
+        marginBottom: "16px"
       }
+    });
+  });
+
+  it("should ignore value if breakpoint index is not defined", () => {
+    const altTheme = {
+      ...theme,
+      breakpoints: [100, 200]
+    };
+    expect(du({ padding: [1, 2, 3, 4, 5] })({ theme: altTheme })).toEqual({
+      padding: "4px",
+      "@media (min-width: 100px)": { padding: "8px" },
+      "@media (min-width: 200px)": { padding: "16px" }
     });
   });
 
@@ -92,5 +103,42 @@ describe("breakpoints", () => {
     expect(du({ letterSpacing: "tracked" })(props)).toEqual({
       letterSpacing: "0.1em"
     });
+  });
+
+  it("should work with nested selectors", () => {
+    const css = {
+      color: "green",
+      "&:hover": {
+        color: "blue"
+      }
+    };
+
+    expect(du(css)(props)).toEqual({
+      color: "#427D00",
+      "&:hover": {
+        color: "#1A6EC1"
+      }
+    });
+
+    const cssDeep = {
+      padding: 1,
+      "div": {
+        color: "green",
+        "&:hover": {
+          color: "blue",
+        }
+      }
+    };
+
+    expect(du(cssDeep)(props)).toEqual({
+      padding: "4px",
+      "div": {
+        color: "#427D00",
+        "&:hover": {
+          color: "#1A6EC1"
+        }
+      }
+    });
+
   });
 });

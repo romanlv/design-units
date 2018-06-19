@@ -1,13 +1,8 @@
 const defaultBreakpoints = ["40em", "52em", "64em"];
 
-const is = n => n !== undefined && n !== null;
-
 const num = n => !isNaN(parseFloat(n)) && isFinite(n);
 
 const px = n => (num(n) ? `${n}px` : n);
-
-// const neg = n => n < 0;
-const arr = n => (Array.isArray(n) ? n : [n]);
 
 const getWidth = n => (!num(n) || n > 1 ? px(n) : `${n * 100}%`);
 const get = (obj, path, fallback) =>
@@ -15,10 +10,10 @@ const get = (obj, path, fallback) =>
 
 const mq = n => `@media (min-width: ${px(n)})`;
 
-const media = bp => (d, i) => (is(d) ? (bp[i] ? { [bp[i]]: d } : d) : null);
+const media = bp => (d, i) => (bp[i] ? { [bp[i]]: d } : i === 0 ? d : null);
 
 const breaks = props => [
-  // null,
+  null,
   ...get(props, ["theme", "breakpoints"], defaultBreakpoints).map(mq)
 ];
 
@@ -58,15 +53,10 @@ const getUnitValue = (theme, cssProp, n) => {
 
   const val = get(theme, [area, n], n);
 
-  if (!val || !num(val)) {
-    return val;
-  }
   return px(val);
 };
 
 const designUnits = obj => props => {
-  // TODO: do not create `bp` until found item with multiple values
-  const bp = breaks(props);
   const { theme } = props;
 
   const procItem = cssProp => {
@@ -74,11 +64,18 @@ const designUnits = obj => props => {
     const getVal = n => getUnitValue(theme, cssProp, n);
 
     if (!Array.isArray(item)) {
-      const val = getVal(item);
+      let val;
+      if (item instanceof Object) {
+        val = designUnits(item)(props);
+      } else {
+        val = getVal(item);
+      }
+
       return { [cssProp]: val };
     }
 
-    return arr(item)
+    const bp = breaks(props);
+    return item
       .map(getVal)
       .map(n => ({ [cssProp]: n }))
       .map(media(bp))
