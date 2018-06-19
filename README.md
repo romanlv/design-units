@@ -92,7 +92,7 @@ theme = {
 
 styled.div`
 ${units({
-  width: [1, 0.5]
+  width: [1, 1/2, 1/4]
 })}
 `
 ```
@@ -100,12 +100,13 @@ is converted to
 
 ```
 styled.div`
+  width: 100%;
   @media (min-width: 320px) {
-    width: 100%;
+    width: 50%;
   }  
 
   @media (min-width: 480px) {
-    width: 50%;
+    width: 25%;
   }
 
 `
