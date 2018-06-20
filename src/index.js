@@ -1,6 +1,6 @@
 const defaultBreakpoints = ["40em", "52em", "64em"];
 
-const num = n => !isNaN(parseFloat(n)) && isFinite(n);
+const num = n => typeof n !== 'string' && !isNaN(parseFloat(n)) && isFinite(n);
 
 const px = n => (num(n) ? `${n}px` : n);
 
