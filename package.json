@@ -1,6 +1,6 @@
 {
   "name": "design-units",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Design system utils for emotion, styled-components and other css-in-js libraries",
   "main": "dist/index.js",
   "scripts": {

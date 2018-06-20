@@ -107,7 +107,7 @@ describe("breakpoints", () => {
     expect(du({ fontWeight: "normal" })(props)).toEqual({
       fontWeight: "400"
     });
-  })
+  });
 
   it("should pick using string keys", () => {
     expect(du({ letterSpacing: "tracked" })(props)).toEqual({
@@ -132,23 +132,22 @@ describe("breakpoints", () => {
 
     const cssDeep = {
       padding: 1,
-      "div": {
+      div: {
         color: "green",
         "&:hover": {
-          color: "blue",
+          color: "blue"
         }
       }
     };
 
     expect(du(cssDeep)(props)).toEqual({
       padding: "4px",
-      "div": {
+      div: {
         color: "#427D00",
         "&:hover": {
           color: "#1A6EC1"
         }
       }
     });
-
   });
 });
