@@ -38,6 +38,7 @@ const mappings = [
   { re: /^padding/, to: "space" },
   { re: /^margin/, to: "space" },
   { re: /color$/i, to: "colors" },
+  { re: /^(stroke|fill)$/i, to: "colors" },
   { name: "fontFamily", to: "fonts" }
 ];
 

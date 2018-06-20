@@ -85,6 +85,13 @@ describe("breakpoints", () => {
     });
   });
 
+  it("should work with svg color props", () => {
+    expect(du({ fill: "green", stroke: "blue" })(props)).toEqual({
+      fill: "#427D00",
+      stroke: "#1A6EC1"
+    });
+  });
+
   it("should work even if theme is not defined", () => {
     expect(du({ backgroundColor: "green" })({})).toEqual({
       backgroundColor: "green"
