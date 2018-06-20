@@ -16,6 +16,10 @@ const theme = {
     tracked: "0.1em",
     tight: "-0.05em",
     mega: "0.25em"
+  },
+  fontWeights: {
+    normal: "400",
+    bold: "500"
   }
 };
 
@@ -98,6 +102,12 @@ describe("breakpoints", () => {
       fontSize: "16px"
     });
   });
+
+  it("should return string values without px", () => {
+    expect(du({ fontWeight: "normal" })(props)).toEqual({
+      fontWeight: "400"
+    });
+  })
 
   it("should pick using string keys", () => {
     expect(du({ letterSpacing: "tracked" })(props)).toEqual({
