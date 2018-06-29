@@ -5,6 +5,10 @@ Only [`~700b`](https://bundlephobia.com/result?p=design-units) bytes (minified a
 
 Read more about [design systems](https://varun.ca/styled-system/)
 
+# installation 
+
+`yarn add design-units`
+
 # examples
 
 ```js
