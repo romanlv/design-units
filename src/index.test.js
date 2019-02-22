@@ -157,4 +157,16 @@ describe("breakpoints", () => {
       }
     });
   });
+
+  it("should work with css props with number value", () => {
+    expect(du({ flexGrow: [1, 2, 3] })(props)).toEqual({
+      flexGrow: 1,
+      "@media (min-width: 320px)": {
+        flexGrow: 2,
+      },
+      "@media (min-width: 480px)": {
+        flexGrow: 3,
+      }
+    });
+  });
 });

@@ -42,6 +42,8 @@ const mappings = [
   { name: "fontFamily", to: "fonts" }
 ];
 
+const numValProps = [ "flexGrow" ];
+
 const getUnitValue = (theme, cssProp, n) => {
   if (cssProp === "width") {
     return getWidth(n);
@@ -54,7 +56,7 @@ const getUnitValue = (theme, cssProp, n) => {
 
   const val = get(theme, [area, n], n);
 
-  return px(val);
+  return numValProps.includes(cssProp) ? val : px(val);
 };
 
 const designUnits = obj => props => {
