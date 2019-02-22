@@ -85,6 +85,16 @@ properties that have `color` keyword in it are mapped to `theme.colors`
 ## All other props
 All other props are mapped to `${popertyName}s`, e.g. `lineHeight: heading` -> `theme.lineHeights.heading`
 
+## No theme units
+If theme unit it nos defined for specific property and then it will append `px` to value if it's a number, to avoid adding `px` just pass value as a string 
+
+```js
+  ${units({
+    width: 200, // -> will use `width: 200px` 
+    flexGrow: "2" // -> `flexGrow: 2`
+  })}
+```
+
 ## Responsive 
 Whenever multiple values defined the unit, it means that those values should be used for different breakpoints 
 
