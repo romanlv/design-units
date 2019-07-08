@@ -1,8 +1,12 @@
 const defaultBreakpoints = ["40em", "52em", "64em"];
 
 const num = n => typeof n !== "string" && !isNaN(parseFloat(n)) && isFinite(n);
+const isRN =
+  typeof document == "undefined" &&
+  typeof navigator != "undefined" &&
+  navigator.product == "ReactNative";
 
-const px = n => (num(n) ? `${n}px` : n);
+const px = n => (!isRN && num(n) ? `${n}px` : n);
 
 const getWidth = n => (!num(n) || n > 1 ? px(n) : `${n * 100}%`);
 const get = (obj, path, fallback) =>

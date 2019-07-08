@@ -1,6 +1,6 @@
 {
   "name": "design-units",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "Design system utils for emotion, styled-components and other css-in-js libraries",
   "main": "dist/index.js",
   "scripts": {
@@ -37,40 +37,5 @@
       "path": "dist/*.min.js",
       "maxSize": "1 kB"
     }
-  ],
-  "jest": {
-    "verbose": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "moduleNameMapper": {},
-    "moduleFileExtensions": [
-      "web.js",
-      "mjs",
-      "js",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ]
-  }
+  ]
 }
