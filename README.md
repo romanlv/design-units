@@ -85,8 +85,17 @@ properties that have `color` keyword in it are mapped to `theme.colors`
 ## All other props
 All other props are mapped to `${popertyName}s`, e.g. `lineHeight: heading` -> `theme.lineHeights.heading`
 
+## Conditionals
+
+just wrap units call into arraw function, so `props` is available for conditional values
+```js
+  ${props => units({
+    color: props.isSelected ? 'primary': 'muted'
+  })(props)}
+```
+
 ## No theme units
-If theme unit it nos defined for specific property and then it will append `px` to value if it's a number, to avoid adding `px` just pass value as a string 
+If theme unit is not defined for specific property, then it will append `px` to value if it's a number. To avoid adding `px` just pass value as a string 
 
 ```js
   ${units({
