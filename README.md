@@ -148,3 +148,55 @@ ${units({
 
 ```
 
+## Use with TypeScript 
+
+To verify unit props againt theme values, following technique can be used: 
+
+1) create `./units.ts` file that will re-export design units function with applied type
+
+```js
+import du from 'design-units';
+import theme from './theme';
+
+export type Color = keyof (typeof theme.colors);
+export type FontFamily = keyof (typeof theme.fonts)
+
+type FontSize = keyof (typeof theme.fontSizes)
+type FontWeight = keyof (typeof theme.fontWeights)
+
+// any css value
+type CssObject = {
+  [key: string]: string | number | CssObject
+}
+
+type CssUnits =  CssObject & {
+  backgroundColor?: Color;
+  color?: Color;
+  borderColor?: Color;
+  fill?: Color;
+  stroke?: Color;
+  outlineColor?: Color;
+  fontSize?: FontSize | FontSize[];
+  fontWeight?: FontWeight | FontWeight[];
+  '&:hover'?: CssUnits;
+  // TODO: add more props and pseudo selectors to fit your usage and theme
+}
+
+type TypedUnits = (css: CssUnits) => (props: any) => CssObject
+
+export default du as TypedUnits;
+```
+
+2) Use this function in your code 
+
+```js
+import du from './units';
+
+
+const StyledDiv = styled.div`
+${du({
+  backgroundColor: 'primaryv', // TS error, no such color defined
+  ...
+})};
+`
+```
