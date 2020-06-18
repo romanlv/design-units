@@ -176,6 +176,7 @@ type CssUnits =  CssObject & {
   fill?: Color;
   stroke?: Color;
   outlineColor?: Color;
+  fontFamily?: FontFamily;
   fontSize?: FontSize | FontSize[];
   fontWeight?: FontWeight | FontWeight[];
   '&:hover'?: CssUnits;
